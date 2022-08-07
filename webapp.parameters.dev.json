@@ -1,0 +1,24 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "storageSKU": {
+        "value": "Standard_LRS"
+      },
+      "appServicePlanName": {
+        "value": "globantappserviceplan123"
+      },
+      "StorageName": {
+        "value": "globantstorageac"
+      },
+      "webAppName": {
+        "value": "globantwebapp"
+      },
+      "resourceTags": {
+        "value": {
+          "Environment": "Dev",
+          "Project": "Tutorial"
+        }
+      }
+    }
+  }

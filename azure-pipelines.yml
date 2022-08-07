@@ -1,0 +1,41 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+  - master
+
+stages:
+  - stage: Dev
+    jobs:
+      - job: 'ARMDevelopment'
+        pool:
+          vmimage: windows-latest
+        steps:
+          - task: AzureResourceManagerTemplateDeployment@3
+            inputs:
+              deploymentScope: 'Resource Group'
+              azureResourceManagerConnection: 'Free Trial(c96ca2f1-886f-4189-8b3e-6aefe8eab34b)'
+              subscriptionId: 'c96ca2f1-886f-4189-8b3e-6aefe8eab34b'
+              action: 'Create Or Update Resource Group'
+              resourceGroupName: 'ArmDeployment'
+              location: 'East US'
+              templateLocation: 'Linked artifact'
+              csmFile: '$(Build.SourcesDirectory)/webapp.json'
+              csmParametersFile: '$(Build.SourcesDirectory)/webapp.parameters.dev.json'
+              deploymentMode: 'Incremental'
+            displayName: 'ARM Template Deployment'
+          - task: PowerShell@2
+            inputs:
+              targetType: 'inline'
+              script: 'Install-Module Az.Resources -RequiredVersion 1.12.1-preview -AllowPrerelease -Force -Scope CurrentUser'
+            displayName: 'Install Az.Resources Module'
+          - task: AzurePowerShell@5
+            inputs:
+              azureSubscription: 'Free Trial(c96ca2f1-886f-4189-8b3e-6aefe8eab34b)'
+              ScriptType: 'FilePath'
+              ScriptPath: '$(Build.SourcesDirectory)/webapp.ps1'
+              ScriptArguments: '-ResourceGroup ArmDeployment'
+              azurePowerShellVersion: 'LatestVersion'
+            displayName: 'Infra Deployment - Final Stage'
