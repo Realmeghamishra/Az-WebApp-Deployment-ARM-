@@ -1,0 +1,39 @@
+Connect az ac
+--------------
+Connect-AzAccount
+
+Disconnect Az ac
+------------------
+Disconnect-AzAccount
+
+Get-command AzAccount
+
+Get-AzContext | ft-w
+Account              SubscriptionName      TenantId               		    Environment
+-------              ----------------      --------                		    -----------
+admin@hellovip.in     Hello Vipin     ddba460e-6cd3-4afd-a55d-d7cefa74dd4c    AzureCloud
+
+
+https://stackoverflow.com/questions/64172102/connect-azaccount-the-term-connect-azaccount-is-not-recognized-as-the-name-o
+
+Extention -->Azure account
+Command Platte --> Press Ctrl+Shift+P --> Azure -Creat an account/login/select SubscriptionName --> go to browser and login to the account
+
+https://docs.microsoft.com/en-us/powershell/azure/install-az-ps ?view=azps-8.1.0
+
+to check the powershell version
+---------------------------------
+$PSVersionTable.PSVersion
+ 
+Install-Module -Name Az -allowClobber -scope AllUsers
+Install-Module -Name Az -allowClobber -scope CurrentUser
+
+Get-ExecutionPolicy -List
+Set-ExecutionPolicy RemoteSigned
+
+Get-AzResourceGroup 
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+
+https://stackoverflow.com/questions/64172102/connect-azaccount-the-term-connect-azaccount-is-not-recognized-as-the-name-o
+
+Install-Module Az.Resources -RequiredVersion 1.12.1-preview -AllowPrerelease -Force -Scope CurrentUser
